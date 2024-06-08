@@ -4,6 +4,7 @@ import { getDataApi } from '../getData/GetData';
 import { useAppContext } from '../context/AppContext';
 import { DisplayHomeMovie } from '../components/DisplayHomeMovie';
 import Footer from '../components/Footer';
+import { Loder } from './Loder';
 
 export const Search = () => {
   const [data, setData] = useState([]);
@@ -47,9 +48,9 @@ export const Search = () => {
     <div className="w-full min-h-screen bg-black">
       <Navbar />
       <div className="p-4 text-white">
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        {!loading && !error && data.length === 0 && <p>No results found</p>}
+        {loading && <Loder text={"Loading..."} />}
+        {error && <Loder text={error} />}
+        {!loading && !error && data.length === 0 && <Loder text={"No results found"} />}
         {data.length > 0 && <DisplayHomeMovie Data={data} />}
       </div>
       <Footer />

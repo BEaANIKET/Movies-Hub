@@ -3,22 +3,26 @@ import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
+import { useLocation } from 'react-router-dom';
 
 export const SearchBar = () => {
 
   const { searchQuery, setSearchQuery} = useAppContext()
+  const location = useLocation();
 
   return (
     <>
-      <NavLink to={'/search'}>
+      <NavLink
+       to={'/search'}>
         <div className="relative text-gray-600">
           <input
             type="search"
             name="search"
             placeholder="Search"
-            value={ searchQuery }
+            value={location.pathname === '/search' ? searchQuery : ''}
             onChange={ (e) => setSearchQuery(e.target.value) }
             className="bg-white border-black border-2 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none w-full sm:w-64 lg:w-96"
+            autoFocus={location.pathname === '/search' ? true : false}
           />
           <button type="submit" className=" text-2xl font-bold absolute right-0 top-0 mt-3 mr-4">
             <FaSearch />

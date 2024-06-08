@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SearchBar } from './SearchBar';
 import logo from '../assets/logo.png'
+import { NavLink } from 'react-router-dom';
 
 
 export const Navbar = () => {
@@ -17,11 +18,11 @@ export const Navbar = () => {
     },
     {
       name: 'Movies',
-      link: ''
+      link: '/movie'
     },
     {
       name: 'Series',
-      link: ''
+      link: '/series'
     },
   ]
 
@@ -41,9 +42,13 @@ export const Navbar = () => {
           {
             navItem.map((item) => (
               <li className=' cursor-auto w-full md:w-fit flex mt-6 md:mt-0   justify-center text-white list-none ' key={item.name}>
-                <a href={item.link} key={item.name} className=' w-fit  hover:text-blue-500 transition-colors'>
-                  {item.name}
-                </a>
+                <NavLink
+                  to={item.link}
+                  style={({ isActive }) => {
+                    return isActive ? { color: "plum" } : {};
+                  }}
+                  key={item.name}
+                  className=' w-fit  hover:text-blue-500 transition-colors'> {item.name} </NavLink>
               </li>
             ))
           }
